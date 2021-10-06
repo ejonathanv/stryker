@@ -33,8 +33,8 @@
               <i data-feather="users"></i><span>Pasajeros</span>
             </a>
             <ul class="nav-submenu menu-content">
-              <li><a href="{{ route('trips.create') }}">Nuevo</a></li>
-              <li><a href="{{ route('trips.index') }}">Lista de pasajeros</a></li>
+              <li><a href="{{ route('passengers.create') }}">Nuevo</a></li>
+              <li><a href="{{ route('passengers.index') }}">Lista de pasajeros</a></li>
             </ul>
           </li>
           <li class="dropdown">

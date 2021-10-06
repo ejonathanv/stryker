@@ -9,17 +9,36 @@ use Illuminate\Http\Request;
 class TripController extends Controller
 {
     public function index(){
+        $trips = Trip::orderBy('date', 'desc')->paginate(10);
+        return view('app.trips.index', compact('trips'));
     }
     public function create(){
         return view('app.trips.create');
     }
     public function store(Request $request){
-        $rules = [
+        $rules = $this->validationRules();
+        $messages = $this->validationMessages();
+        $validate = Validator::make($request->all(), $rules, $messages)->validate();
+
+        $trip = new Trip();
+        $trip->title = $request->title;
+        $trip->address = $request->address;
+        $trip->date = Carbon::parse($request->date);
+        $trip->save();
+
+        return redirect()->route('trips.show', $trip)->with('message', "Se ha creado un nuevo viaje.");
+    }
+
+    public function validationRules(){
+        return [
             'title' => 'required|string',
             'address' => 'required|string',
             'date' => 'required|date' 
         ];
-        $messages = [   
+    }
+
+    public function validationMessages(){
+        return [   
             'title.required' => 'Agrega el título de el viaje',
             'title.string' => 'El título no es válido',
             'address.required' => 'Agrega la dirección del viaje',
@@ -27,17 +46,26 @@ class TripController extends Controller
             'date.required' => 'La fecha es requerida',
             'date.date' => 'La fecha no es válida',
         ];
+    }
+
+    public function show(Trip $trip){
+        return view('app.trips.show', compact('trip'));
+    }
+
+    public function update(Request $request, Trip $trip){
+
+        $rules = $this->validationRules();
+        $messages = $this->validationMessages();
         $validate = Validator::make($request->all(), $rules, $messages)->validate();
-        $trip = new Trip();
+
         $trip->title = $request->title;
         $trip->address = $request->address;
         $trip->date = Carbon::parse($request->date);
         $trip->save();
-        return redirect()->route('trips.show', $trip)->with('message', "Se ha creado un nuevo viaje.");
+
+        return redirect()->back()->with('message', "La información ha sido actualizada");
     }
-    public function show(Trip $trip){
-        return view('app.trips.show', compact('trip'));
-    }
+
     public function setDriver(Request $request, Trip $trip){
         $rules = [
             'driver' => 'required|exists:drivers,id',

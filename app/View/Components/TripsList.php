@@ -1,21 +1,24 @@
 <?php
+
 namespace App\View\Components;
+
 use Illuminate\View\Component;
-class DashboardLayout extends Component
+
+class TripsList extends Component
 {
 
-    public $pageTitle;
-    public $helperLinks;
+    public $trips;
 
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct($pageTitle)
+    public function __construct($trips)
     {
-        $this->pageTitle = $pageTitle;
+        $this->trips = $trips;
     }
+
     /**
      * Get the view / contents that represent the component.
      *
@@ -23,6 +26,6 @@ class DashboardLayout extends Component
      */
     public function render()
     {
-        return view('layouts.dashboard');
+        return view('app.trips.partials.trips-list');
     }
 }

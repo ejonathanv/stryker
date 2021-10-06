@@ -19,4 +19,8 @@ class Trip extends Model
         return $this->hasMany(TripDriver::class);
     }
 
+    public function getDriverNameAttribute(){
+        return $this->drivers->first()->driver->full_name;
+    }
+
 }
