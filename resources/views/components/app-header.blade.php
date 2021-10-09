@@ -31,6 +31,7 @@
     <link rel="stylesheet" type="text/css" href="/assets/css/bootstrap.css">
     <!-- App css-->
     <link rel="stylesheet" type="text/css" href="/assets/css/style.css">
+    <link rel="stylesheet" type="text/css" href="/css/custom.css">
     <link id="color" rel="stylesheet" href="/assets/css/color-1.css" media="screen">
     <!-- Responsive css-->
     <link rel="stylesheet" type="text/css" href="/assets/css/responsive.css">

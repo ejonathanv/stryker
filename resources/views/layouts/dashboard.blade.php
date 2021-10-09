@@ -12,6 +12,13 @@
   <div class="container-fluid">
     <div class="row">
       <div class="col-sm-12">
+
+        @if (session('message'))
+            <div class="alert alert-success mb-4">
+                {{ session('message') }}
+            </div>
+        @endif
+
         {{ $slot }}
       </div>
     </div>

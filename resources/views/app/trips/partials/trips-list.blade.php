@@ -1,32 +1,39 @@
 <div class="card">
     <div class="card-header d-flex align-items-center">
         <div>
-            <h5>Viajes</h5>
-            <span>Lista de todos los viajes registrados.</span>
+            <h5>{{ $title }}</h5>
+            <span>{{ $subtitle }}</span>
         </div>
         <a href="{{ route('trips.create') }}" class="btn btn-success ms-auto">
             Nuevo
         </a>
     </div>
+    @if(count($trips))
     <div class="table-responsive">
         <table class="table">
             <thead>
                 <tr>
-                    <th scope="col">#</th>
                     <th scope="col">Fecha</th>
                     <th scope="col">Título</th>
                     <th scope="col">Conductor</th>
-                    <th scope="col">Total de pasajeros</th>
+                    <th scope="col">Pasajeros</th>
                     <th></th>
                 </tr>
             </thead>
             <tbody>
                 @foreach($trips as $trip)
                 <tr>
-                    <th scope="row">{{ $trip->id }}</th>
                     <td>{{ $trip->date->format('d M, Y') }}</td>
-                    <td>{{ $trip->title }}</td>
-                    <td>{{ $trip->driver_name }}</td>
+                    <td>
+                        <a href="{{ route('trips.show', $trip) }}">
+                            {{ $trip->title }}
+                        </a>
+                    </td>
+                    <td>
+                        <a href="{{ route('drivers.show', $trip->driver->driver) }}">
+                            {{ $trip->driver_name }}
+                        </a>
+                    </td>
                     <td>({{ count($trip->passengers) }}) Pasajeros</td>
                     <td>
                         <a href="{{ route('trips.show', $trip) }}">
@@ -38,7 +45,14 @@
             </tbody>
         </table>
     </div>
+    @else
+    <div class="card-body">
+        <p class="m-0">No hay viajes registrados.</p>
+    </div>
+    @endif
+    @if($trips->total() > $trips->perPage())
     <div class="card-footer">
         {{ $trips->links() }}
     </div>
+    @endif
 </div>

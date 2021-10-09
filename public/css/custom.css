@@ -1,0 +1,12 @@
+.avatarThumb{
+	width:  75px;
+	height: 75px;
+	border-radius: 50%;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+.avatarThumb.sm{
+	width: 40px;
+	height: 40px;
+}

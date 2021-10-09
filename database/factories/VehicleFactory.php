@@ -22,14 +22,15 @@ class VehicleFactory extends Factory
     public function definition()
     {
         return [
+            'vehicle_id' => hexdec(uniqid()),
             'type' => $this->faker->word(),
             'model' => $this->faker->word(),
             'brand' => $this->faker->word(),
             'year' => rand(2012,2022),
             'capacity' => rand(5,12),
+            'color' => $this->faker->randomElement(['Blanco', 'Negro', 'Azul', 'Plateado']),
             'plates' => hexdec(uniqid()),
             'plates_region' => $this->faker->randomElement(['MX', 'USA']),
-            'picture' => 'http://placehold.it/600x600',
         ];
     }
 }

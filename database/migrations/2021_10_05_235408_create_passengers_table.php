@@ -15,10 +15,10 @@ class CreatePassengersTable extends Migration
     {
         Schema::create('passengers', function (Blueprint $table) {
             $table->id();
-            $table->integer('company_id');
+            $table->integer('company_id')->nullable();
             $table->string('first_name');
             $table->string('last_name');
-            $table->string('email')->unique();
+            $table->string('email')->unique()->nullable();
             $table->string('gender');
             $table->string('jobtitle')->nullable();
             $table->string('phone')->nullable();

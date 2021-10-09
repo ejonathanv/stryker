@@ -1,22 +1,29 @@
 <div class="card">
     <div class="card-header pb-0">
         <h5>{{ $title }}</h5>
-        <span>Por favor llena los siguientes campos, los campos marcados con (*) son requeridos.</span>
+        <span>
+            Por favor llena los siguientes campos, los campos marcados con (*) son requeridos.
+        </span>
     </div>
     <div class="card-body">
         <form action="{{ $route }}" class="theme-form" id="passengerForm" method="post">
+            
             @csrf
+
+            @if($type == 'update')
+                @method('put')
+            @endif
+
             <div class="row mb-3">
                 <div class="col-12 col-sm-6">
                     <div class="mb-0">
-                        <label class="col-form-label pt-0" for="passengerFirstName">Nombre(s):</label>
+                        <label class="col-form-label pt-0" for="passengerFirstName">*Nombre(s):</label>
                         <input class="form-control" 
                             id="passengerFirstName" 
                             type="text"
                             name="first_name"
                             value="{{ $passenger ? $passenger->first_name : old('first_name') }}"
-                            required
-                            autofocus>
+                            required>
 
                         @error('first_name')
                             <small class="form-text text-danger">{{ $message }}</small>
@@ -25,7 +32,7 @@
                 </div>
                 <div class="col-12 col-sm-6">
                     <div class="mb-0">
-                        <label class="col-form-label pt-0" for="passengerLastName">Apellido(s):</label>
+                        <label class="col-form-label pt-0" for="passengerLastName">*Apellido(s):</label>
                         <input class="form-control" 
                             id="passengerLastName" 
                             type="text"
@@ -43,8 +50,8 @@
             <div class="row mb-3">
                 <div class="col-12 col-sm-4">
                     <div class="mb-0">
-                        <label class="col-form-label pt-0" for="passengerGender">Género:</label>
-                        <select name="gender" class="form-select" id="passengerGender">
+                        <label class="col-form-label pt-0" for="passengerGender">*Género:</label>
+                        <select name="gender" class="form-select" id="passengerGender" required>
                             <option disabled selected value="">--Elige una opción--</option>
                             <option {{ $passenger ? $passenger->gender == 'Male' ? 'selected' : '' : ''}} value="Male">Masculino</option>
                             <option {{ $passenger ? $passenger->gender == 'Female' ? 'selected' : '' : ''}} value="Female">Femenino</option>
@@ -57,7 +64,7 @@
                 </div>
                 <div class="col-12 col-sm-4">
                     <div class="mb-0">
-                        <label class="col-form-label pt-0" for="passengerEmail">Correo electrónico:</label>
+                        <label class="col-form-label pt-0" for="passengerEmail">Correo electrónico (opcional):</label>
                         <input class="form-control" 
                             id="passengerEmail" 
                             type="email"
@@ -72,7 +79,7 @@
                 </div>
                 <div class="col-12 col-sm-4">
                     <div class="mb-0">
-                        <label class="col-form-label pt-0" for="passengerPhone">Celular:</label>
+                        <label class="col-form-label pt-0" for="passengerPhone">Teléfono/Celular:</label>
                         <input class="form-control" 
                             id="passengerPhone" 
                             type="text"
@@ -89,11 +96,15 @@
             <div class="row mb-4">
                 <div class="col-12 col-sm-6">
                     <div class="mb-0">
-                        <label class="col-form-label pt-0" for="passengerCompany">Compañía:</label>
+                        <label class="col-form-label pt-0" for="passengerCompany">Compañía (opcional):</label>
                         <input class="form-control" 
                             id="passengerCompany" 
                             type="text"
-                            value="{{ $passenger ? $passenger->company->name : old('company') }}"
+                            value="{{ $passenger 
+                                ? $passenger->company 
+                                    ? $passenger->company->name
+                                    : ''
+                                : old('company') }}"
                             name="company">
 
                         @error('company')
@@ -103,7 +114,7 @@
                 </div>
                 <div class="col-12 col-sm-6">
                     <div class="mb-0">
-                        <label class="col-form-label pt-0" for="passengerJobTitle">Puesto laboral:</label>
+                        <label class="col-form-label pt-0" for="passengerJobTitle">Puesto laboral (opcional):</label>
                         <input class="form-control" 
                             id="passengerJobTitle" 
                             type="text"

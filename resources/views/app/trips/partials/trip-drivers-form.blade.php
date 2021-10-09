@@ -3,13 +3,41 @@
         <h5>{{ $title }}</h5>
         <span>Selecciona el conductor y el vehículo para este viaje.</span>
     </div>
+
+    @if($trip->driver)
+        <div class="card-body border-top border-bottom mt-4">
+            <div class="row">
+                <div class="col-12 col-sm-6">
+                    <div class="d-flex align-items-center">
+                        <div class="avatarThumb" style="background-image: url('{{ asset($trip->driver->driver->avatar_url) }}')"></div>
+                        <div class="ms-3">
+                            <small class="d-block mb-2 font-weight-bold">Conductor asignado:</small>
+                            <h6 class="text-success">{{ $trip->driver->driver->full_name }}</h6>
+                            <p class="m-0">{{ $trip->driver->driver->phone }}</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12 col-sm-6">
+                    <div class="d-flex align-items-center">
+                        <div class="avatarThumb" style="background-image: url('{{ asset($trip->driver->vehicle->picture_url) }}')"></div>
+                        <div class="ms-3">
+                            <small class="d-block mb-2 font-weight-bold">Vehículo:</small>
+                            <h6 class="text-success">{{ $trip->driver->vehicle->short_name }}</h6>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endif
+
     <div class="card-body">
         <form class="theme-form" action="{{ route('set-trip-driver', $trip) }}" id="tripDriversForm" method="post">
             @csrf
             <div class="row mb-3">
                 <div class="col-12 col-sm-6">
                     <div class="mb-0">
-                        <label class="col-form-label pt-0" for="selectDriver">Conductor:</label>
+                        <label class="col-form-label pt-0" for="selectDriver">*Conductor:</label>
                         <select class="form-select" id="selectDriver" name="driver" required>
                             <option disabled selected value="">--Elige una opción--</option>
                             @foreach($drivers as $driver)
@@ -31,7 +59,7 @@
                 </div>
                 <div class="col-12 col-sm-6">
                     <div class="mb-0">
-                        <label class="col-form-label pt-0" for="selectVehicle">Vehículo:</label>
+                        <label class="col-form-label pt-0" for="selectVehicle">*Vehículo:</label>
                         <select class="form-select" id="selectVehicle" name="vehicle" required>
                             <option disabled selected value="">--Elige una opción--</option>
                             @foreach($vehicles as $vehicle)
@@ -52,7 +80,7 @@
             <div class="row mb-3">
                 <div class="col-12 col-sm-6">
                     <div class="mb-0">
-                        <label class="col-form-label pt-0" for="tripFrom">Ubicación de inicio de viaje:</label>
+                        <label class="col-form-label pt-0" for="tripFrom">*Ubicación de inicio de viaje:</label>
                         <input class="form-control" 
                             id="tripFrom"
                             name="from"
@@ -66,7 +94,7 @@
                 </div>
                 <div class="col-12 col-sm-6">
                     <div class="mb-0">
-                        <label class="col-form-label pt-0" for="tripFromHour">Hora en que inicia el viaje:</label>
+                        <label class="col-form-label pt-0" for="tripFromHour">*Hora en que inicia el viaje:</label>
                         <input type="time" 
                             class="form-control" 
                             name="from_time" 
@@ -83,7 +111,7 @@
             <div class="row">
                 <div class="col-12 col-sm-6">
                     <div class="mb-0">
-                        <label class="col-form-label pt-0" for="tripTo">Ubicación de finalización de viaje:</label>
+                        <label class="col-form-label pt-0" for="tripTo">*Ubicación de finalización de viaje:</label>
                         <input class="form-control" 
                             id="tripTo"
                             name="to"
@@ -97,7 +125,7 @@
                 </div>
                 <div class="col-12 col-sm-6">
                     <div class="mb-0">
-                        <label class="col-form-label pt-0" for="tripToHour">Hora en que finaliza el viaje:</label>
+                        <label class="col-form-label pt-0" for="tripToHour">*Hora en que finaliza el viaje:</label>
                         <input type="time" 
                             class="form-control" 
                             name="to_time" 

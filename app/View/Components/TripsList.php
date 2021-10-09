@@ -7,6 +7,8 @@ use Illuminate\View\Component;
 class TripsList extends Component
 {
 
+    public $title;
+    public $subtitle;
     public $trips;
 
     /**
@@ -14,8 +16,10 @@ class TripsList extends Component
      *
      * @return void
      */
-    public function __construct($trips)
+    public function __construct($trips, $title = 'Viajes', $subtitle = 'Lista de todos los viajes registrados.')
     {
+        $this->title = $title;
+        $this->subtitle = $subtitle;
         $this->trips = $trips;
     }
 

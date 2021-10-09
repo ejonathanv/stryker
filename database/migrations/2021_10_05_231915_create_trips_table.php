@@ -13,9 +13,11 @@ class CreateTripsTable extends Migration
     {
         Schema::create('trips', function (Blueprint $table) {
             $table->id();
+            $table->integer('group_id')->nullable();
             $table->string('title');
             $table->timestamp('date');
             $table->string('address');
+            $table->integer('status')->default(1); //1 = Activo, 2 = Inactivo, 3 = En pausa, 4 = Cancelado
             $table->timestamps();
         });
     }

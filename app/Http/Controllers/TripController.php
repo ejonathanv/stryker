@@ -9,18 +9,21 @@ use Illuminate\Http\Request;
 class TripController extends Controller
 {
     public function index(){
-        $trips = Trip::orderBy('date', 'desc')->paginate(10);
+        $trips = Trip::orderBy('date', 'desc')->paginate(10); 
         return view('app.trips.index', compact('trips'));
     }
     public function create(){
         return view('app.trips.create');
     }
     public function store(Request $request){
-        $rules = $this->validationRules();
-        $messages = $this->validationMessages();
-        $validate = Validator::make($request->all(), $rules, $messages)->validate();
+        $validate = Validator::make(
+            $request->all(), 
+            $this->validationRules(), 
+            $this->validationMessages()
+        )->validate();
 
         $trip = new Trip();
+        $trip->group_id = $request->group;
         $trip->title = $request->title;
         $trip->address = $request->address;
         $trip->date = Carbon::parse($request->date);
@@ -32,8 +35,10 @@ class TripController extends Controller
     public function validationRules(){
         return [
             'title' => 'required|string',
+            'group' => 'sometimes|nullable|exists:groups,id',
             'address' => 'required|string',
-            'date' => 'required|date' 
+            'date' => 'required|date',
+            'status' => 'required|in:1,2,3,4' 
         ];
     }
 
@@ -41,10 +46,13 @@ class TripController extends Controller
         return [   
             'title.required' => 'Agrega el título de el viaje',
             'title.string' => 'El título no es válido',
+            'group.exists' => 'El grupo seleccionado no es válido',
             'address.required' => 'Agrega la dirección del viaje',
             'address.string' => 'La dirección no es válida',
             'date.required' => 'La fecha es requerida',
             'date.date' => 'La fecha no es válida',
+            'status.required' => 'Selecciona el estatus del viaje',
+            'status.in' => 'El estatus seleccionado no es válido'
         ];
     }
 
@@ -54,10 +62,14 @@ class TripController extends Controller
 
     public function update(Request $request, Trip $trip){
 
-        $rules = $this->validationRules();
-        $messages = $this->validationMessages();
-        $validate = Validator::make($request->all(), $rules, $messages)->validate();
+        $validate = Validator::make(
+            $request->all(), 
+            $this->validationRules(), 
+            $this->validationMessages()
+        )->validate();
 
+
+        $trip->group_id = $request->group;
         $trip->title = $request->title;
         $trip->address = $request->address;
         $trip->date = Carbon::parse($request->date);
@@ -113,13 +125,34 @@ class TripController extends Controller
             'passenger.exists' => 'El pasajero no existe'
         ];
         $validate = Validator::make($request->all(), $rules, $messages);
-        $tripPassenger = new TripPassenger();
-        $tripPassenger->passenger_id = $request->passenger;
-        $tripPassenger->trip_id = $trip->id;
-        $tripPassenger->trip_driver_id = $trip->drivers->first()->id;
-        $tripPassenger->save();
 
-        return redirect()->back()->with('message', "Se ha agregado a {$tripPassenger->passenger->full_name} al viaje");
+        $alreadyAdded = $this->validateIfPassengerIsAlreadyAdded($request, $trip);
+
+        if(!count($alreadyAdded)){
+
+            $tripPassenger = new TripPassenger();
+            $tripPassenger->passenger_id = $request->passenger;
+            $tripPassenger->trip_id = $trip->id;
+            $tripPassenger->trip_driver_id = $trip->drivers->first()->id;
+            $tripPassenger->save();
+
+            return redirect()->back()->with('message', "Se ha agregado a {$tripPassenger->passenger->full_name} al viaje");
+        }else{
+
+            return redirect()->back()->withErrors([
+                'passenger' => 'El pasajero seleccionado ya se encuentra agregado al viaje.'
+            ]);
+
+        }
+
+    }
+
+    public function validateIfPassengerIsAlreadyAdded($request, $trip)
+    {
+        
+        $alreadyAdded = $trip->passengers->where('passenger_id', $request->passenger);
+
+        return $alreadyAdded;
     }
 
     public function removePassenger(TripPassenger $tripPassenger){

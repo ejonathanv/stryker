@@ -6,7 +6,7 @@ use App\Models\Company;
 use App\Models\Passenger;
 use Illuminate\Http\Request;
 use Validator;
-
+use Illuminate\Validation\Rule;
 class PassengerController extends Controller
 {
 
@@ -28,16 +28,34 @@ class PassengerController extends Controller
     public function store(Request $request)
     {
 
-        $rules    = $this->validationRules();
-        $messages = $this->validationMessages();
-        $validate = Validator::make($request->all(), $rules, $messages)->validate();
+        $validate = Validator::make(
+            $request->all(), 
+            $this->validationRules(), 
+            $this->validationMessages()
+        )->validate();
 
-        $company = Company::firstOrCreate([
-            'name' => $request->company,
-        ]);
 
-        $passenger             = new Passenger();
-        $passenger->company_id = $company->id;
+        $newPassenger = new Passenger();
+        $passenger = $this->storeOrUpdatePassenger($request, $newPassenger);
+
+        return redirect()
+            ->route('passengers.show', $passenger)
+            ->with('message', "Se agrego correctamente a {$passenger->full_name}");
+
+    }
+
+    public function storeOrUpdatePassenger($request, $passenger)
+    {
+
+        if($request->company){
+            $company = Company::firstOrCreate([
+                'name' => $request->company,
+            ]);
+        }else{
+            $company = null;
+        }
+
+        $passenger->company_id = $company ? $company->id : null;
         $passenger->first_name = $request->first_name;
         $passenger->last_name  = $request->last_name;
         $passenger->email      = $request->email;
@@ -47,22 +65,38 @@ class PassengerController extends Controller
         $passenger->fmm        = boolval($request->fmm) ? 1 : 0;
 
         $passenger->save();
+        
+        return $passenger;
+    }
 
-        return redirect()
-            ->route('passengers.show', $passenger)
-            ->with('message', "Se agrego correctamente a {$passenger->full_name}");
+    public function update(Request $request, Passenger $passenger)
+    {
+
+        $validate = Validator::make(
+            $request->all(), 
+            $this->validationRules($passenger->id), 
+            $this->validationMessages()
+        )->validate();
+
+        $this->storeOrUpdatePassenger($request, $passenger);
+
+        return redirect()->back()->with('message', 'La información ha sido actualizada.');
 
     }
 
-    public function validationRules()
+    public function validationRules($passengerId = null)
     {
         return [
             'first_name' => 'required|string',
             'last_name'  => 'required|string',
-            'email'      => 'required|email|unique:passengers',
+            'email'      => [
+                'nullable',
+                'email',
+                Rule::unique('passengers')->ignore($passengerId)
+            ],
             'gender'     => 'required|in:Male,Female',
-            'company'    => 'required|string',
-            'jobtitle'   => 'required|string',
+            'company'    => 'nullable|string',
+            'jobtitle'   => 'nullable|string',
             'phone'      => 'nullable|string',
         ];
     }
@@ -74,14 +108,11 @@ class PassengerController extends Controller
             'first_name.string'   => 'El nombre del pasajero no es válido',
             'last_name.required'  => 'El apellido del pasajero es requerido',
             'last_name.string'    => 'El apellido del pasajero no es válido',
-            'email.required'      => 'El correo electrónico del pasajero es requerido',
             'email.email'         => 'El correo electrónico no es válido',
             'email.unique'        => 'El correo electrónico ya se encuentra registrado',
             'gender.required'     => 'El género del pasajero es requerido',
             'gender.in'           => 'El género seleccionado no es válido',
-            'company.required'    => 'La compañía del pasajero es requerida',
             'company.string'      => 'La compañía proporcionada no es válida',
-            'jobtitle.required'   => 'El puesto laboral del pasajero es requerido',
             'jobtitle.string'     => 'El puesto laboral del pasajero no es válido',
             'phone.string'        => 'El telefono del pasajero no es válido',
         ];

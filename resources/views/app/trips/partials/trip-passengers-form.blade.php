@@ -9,7 +9,7 @@
                <form class="theme-form" action="{{ route('add-trip-passenger', $trip) }}" id="tripPassengerForm" method="post">
                    @csrf
                    <div class="mb-0">
-                     <label class="col-form-label pt-0" for="selectPassenger">Pasajeros:</label>
+                     <label class="col-form-label pt-0" for="selectPassenger">*Elije un pasajero:</label>
                      <select class="form-select" id="selectPassenger" name="passenger" required @if(!count($trip->drivers)) disabled @endif>
                          <option disabled selected value="">--Elige una opción--</option>
                          @foreach($passengers as $passenger)

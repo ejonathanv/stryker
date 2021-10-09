@@ -2,6 +2,7 @@
 
 namespace App\View\Components;
 
+use App\Models\Group;
 use Illuminate\View\Component;
 
 class TripForm extends Component
@@ -10,7 +11,19 @@ class TripForm extends Component
     public $title;
     public $type;
     public $trip;
-    public $route;
+    
+    public function route(){
+        if($this->type == 'post'){
+            return route('trips.store');
+        }elseif($this->type == 'update'){
+            return route('trips.update', $this->trip->id);
+        }
+    }
+
+    public function groups(){
+        $groups = Group::orderBy('name')->get();
+        return $groups;
+    }
 
 
     /**
@@ -23,12 +36,6 @@ class TripForm extends Component
         $this->trip = $trip;
         $this->title = $title;
         $this->type = $type;
-
-        if($this->type == 'post'){
-            $this->route = route('trips.store');
-        }elseif($this->type == 'update'){
-            $this->route = route('trips.update', $this->trip->id);
-        }
 
     }
 

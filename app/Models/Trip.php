@@ -11,6 +11,10 @@ class Trip extends Model
 
     protected $dates = ['date'];
 
+    public function group(){
+        return $this->belongsTo(Group::class);
+    }
+
     public function passengers(){
         return $this->hasMany(TripPassenger::class);
     }
@@ -19,8 +23,14 @@ class Trip extends Model
         return $this->hasMany(TripDriver::class);
     }
 
+    public function getDriverAttribute(){
+        return $this->drivers->first();
+    }
+
     public function getDriverNameAttribute(){
-        return $this->drivers->first()->driver->full_name;
+        return $this->driver 
+            ? $this->driver->driver->full_name
+            : 'Sin conductor asignado';
     }
 
 }
