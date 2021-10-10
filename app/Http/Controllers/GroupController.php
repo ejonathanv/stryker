@@ -62,7 +62,7 @@ class GroupController extends Controller
             'trips' => $trips
         ];
 
-        return \PDF::loadView('app.groups.pdf.trips', $data)
+        return PDF::loadView('app.groups.pdf.trips', $data)
             ->stream($group->group_id . '.pdf');
     }
 

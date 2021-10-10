@@ -167,7 +167,7 @@ class TripController extends Controller
             'trip' => $trip
         ];
 
-        return \PDF::loadView('app.trips.pdf.trip', $data)
+        return PDF::loadView('app.trips.pdf.trip', $data)
             ->stream($trip->trip_id . '.pdf');
     }
 
