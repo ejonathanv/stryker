@@ -51,4 +51,19 @@ class GroupController extends Controller
         ];
     }
 
+
+    public function exportToPdf(Request $request, Group $group)
+    {
+
+        $trips = $group->trips()->orderBy('date', 'asc')->get();
+
+        $data = [
+            'group' => $group,
+            'trips' => $trips
+        ];
+
+        return \PDF::loadView('app.groups.pdf.trips', $data)
+            ->stream($group->group_id . '.pdf');
+    }
+
 }

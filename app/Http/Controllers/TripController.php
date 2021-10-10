@@ -23,6 +23,7 @@ class TripController extends Controller
         )->validate();
 
         $trip = new Trip();
+        $trip->trip_id = hexdec(uniqid());
         $trip->group_id = $request->group;
         $trip->title = $request->title;
         $trip->address = $request->address;
@@ -158,6 +159,16 @@ class TripController extends Controller
     public function removePassenger(TripPassenger $tripPassenger){
         $tripPassenger->delete();
         return redirect()->back();
+    }
+
+    public function exportToPdf(Request $request, Trip $trip)
+    {
+        $data = [
+            'trip' => $trip
+        ];
+
+        return \PDF::loadView('app.trips.pdf.trip', $data)
+            ->stream($trip->trip_id . '.pdf');
     }
 
 }

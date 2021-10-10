@@ -13,6 +13,7 @@ class CreateTripsTable extends Migration
     {
         Schema::create('trips', function (Blueprint $table) {
             $table->id();
+            $table->string('trip_id');
             $table->integer('group_id')->nullable();
             $table->string('title');
             $table->timestamp('date');

@@ -22,6 +22,7 @@ class TripFactory extends Factory
         $date = Carbon::now()->addDays(rand(0,10));
 
         return [
+            'trip_id' => hexdec(uniqid()),
             'title' => $this->faker->realText(40),
             'date' => $date,
             'address' => $this->faker->streetAddress

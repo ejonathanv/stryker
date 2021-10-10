@@ -17,9 +17,11 @@ Route::group(['prefix' => 'dashboard', 'middleware' => 'auth'], function(){
     Route::post('set-trip-driver/{trip}', [TripController::class, 'setDriver'])->name('set-trip-driver');
     Route::post('add-trip-passenger/{trip}', [TripController::class, 'addPassenger'])->name('add-trip-passenger');
     Route::delete('remove-passenger/{tripPassenger}', [TripController::class, 'removePassenger'])->name('remove-passenger');
+    Route::post('export-to-pdf/{trip}', [TripController::class, 'exportToPdf'])->name('export-to-pdf');
 
     // Grupos
     Route::resource('/groups', GroupController::class);
+    Route::post('export-group-to-pdf/{group}', [GroupController::class, 'exportToPdf'])->name('export-group-to-pdf');
 
     // Pasajeros
     Route::resource('/passengers', PassengerController::class);

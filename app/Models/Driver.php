@@ -21,4 +21,11 @@ class Driver extends Model
             return 'https://i.pravatar.cc/' . rand(300,400);
         }
     }
+    public function getAvatarUrlPublicPathAttribute(){
+        if($this->avatar){
+            return public_path('/avatars/' . $this->user->user_id . '/' . $this->avatar);
+        }else{
+            return 'https://i.pravatar.cc/' . rand(300,400);
+        }
+    }
 }

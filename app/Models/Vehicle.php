@@ -25,4 +25,12 @@ class Vehicle extends Model
         }
     }
 
+    public function getPictureUrlPublicPathAttribute(){
+        if($this->picture){
+            return public_path('vehicles/' . $this->vehicle_id . '/' . $this->picture);
+        }else{
+            return 'http://placehold.it/600x600';
+        }
+    }
+
 }
