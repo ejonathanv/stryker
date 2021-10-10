@@ -5,6 +5,7 @@ use App\Models\TripDriver;
 use App\Models\TripPassenger;
 use Carbon\Carbon;
 use Validator;
+use PDF;
 use Illuminate\Http\Request;
 class TripController extends Controller
 {

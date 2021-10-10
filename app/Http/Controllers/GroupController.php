@@ -3,6 +3,7 @@ namespace App\Http\Controllers;
 use App\Models\Group;
 use Illuminate\Http\Request;
 use Validator;
+use PDF;
 class GroupController extends Controller
 {
 
