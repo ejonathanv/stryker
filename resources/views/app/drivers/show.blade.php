@@ -8,7 +8,7 @@
 					<div class="avatarThumb mb-3" style="background-image: url('{{ $driver->avatar_url }}');"></div>
 					<h4 class="mb-3">{{ $driver->full_name }}</h4>
 					<p class="mb-0 text-muted">E-mail: {{ $driver->user->email }}</p>
-					<p class="mb-4 text-muted">Phone: {{ $driver->user->email }}</p>
+					<p class="mb-4 text-muted">Phone: {{ $driver->phone }}</p>
 					<a href="{{ route('drivers.edit', $driver) }}" class="text-success">
 						<i class="fa fa-pencil-alt fa-xs me-2"></i>
 						Editar perfil
