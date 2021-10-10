@@ -3,7 +3,10 @@
     <h4>{{ $trip->title }}</h4>
     <h4>Fecha: {{ $trip->date->format('d M, Y') }}</h4>
     <h4>Iniciando en: {{ $trip->address }}</h4>
-    <h4>ID de viaje: {{ $trip->trip_id }}</h4>
+    <h4>
+        ID de viaje: 
+        <span style="color: red">{{ $trip->trip_id }}</span>
+    </h4>
 
     <h1>Pasajeros:</h1>
     <table cellpadding="5" cellspacing="0" border="1">
