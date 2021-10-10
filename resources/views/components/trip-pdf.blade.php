@@ -46,7 +46,7 @@
             <tr>
                 <th width="25%">Fotografía:</th>
                 <td>
-                    <div class="avatar" style="background-image: url('{{ $trip->driver->driver->avatar_url_public_path }}')"></div>
+                    <img src="{{ $trip->driver->driver->avatar_url }}" style="height: 90px; width: auto;" alt="">
                 </td>
             </tr>
             <tr>
@@ -70,7 +70,7 @@
             <tr>
                 <th width="25%">Fotografía:</th>
                 <td>
-                    <div class="avatar" style="background-image: url('{{ $trip->driver->vehicle->picture_url_public_path  }}')"></div>
+                    <img src="{{ $trip->driver->vehicle->picture_url_public_path }}" style="height: 100px; width: auto;" alt="">
                 </td>
             </tr>
             <tr>
