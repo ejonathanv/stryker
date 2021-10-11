@@ -30,9 +30,13 @@
                         </a>
                     </td>
                     <td>
+                        @if($trip->driver)
                         <a href="{{ route('drivers.show', $trip->driver->driver) }}">
                             {{ $trip->driver_name }}
                         </a>
+                        @else
+                        Sin conductor asignado
+                        @endif
                     </td>
                     <td>({{ count($trip->passengers) }}) Pasajeros</td>
                     <td>
