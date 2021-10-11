@@ -1127,12 +1127,12 @@
 
 @media screen and (max-width: 991px) {
   .page-wrapper.compact-wrapper .page-body-wrapper header.main-nav {
-    top: 65px; }
+    top: 87px; }
   .ttl-info {
     display: block; }
   .page-wrapper .page-body-wrapper .page-body {
-    min-height: calc(100vh - 65px);
-    margin-top: 65px; }
+    min-height: calc(100vh - 87px);
+    margin-top: 87px; }
   .customizer-contain {
     top: 62px; }
   .mobile-clock-widget #date {
@@ -2368,7 +2368,7 @@
     .page-wrapper .page-main-header .main-header-right .nav-right .chat-dropdown:after, .page-wrapper .page-main-header .main-header-right .nav-right .chat-dropdown:before {
       left: 138px !important; }
   .page-wrapper .page-main-header .main-header-right .main-header-left {
-    padding: 15px; }
+    padding: 9px 15px; }
     .page-wrapper .page-main-header .main-header-right .main-header-left .toggle-sidebar {
       margin-left: 20px; }
   .page-wrapper .page-body-wrapper .page-header .btn-group .btn {
