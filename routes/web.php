@@ -9,6 +9,7 @@ use App\Http\Controllers\VehicleController;
 use Illuminate\Support\Facades\Route;
 
 Route::redirect('/', 'login');
+Route::redirect('register', 'login');
 Route::group(['prefix' => 'dashboard', 'middleware' => 'auth'], function(){
     Route::redirect('/', '/dashboard/trips')->name('dashboard');
 
@@ -33,5 +34,4 @@ Route::group(['prefix' => 'dashboard', 'middleware' => 'auth'], function(){
     Route::resource('/vehicles', VehicleController::class);
 
 });
-
 require __DIR__.'/auth.php';
