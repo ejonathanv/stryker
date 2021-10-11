@@ -1,15 +1,15 @@
 <div>
-    <h1>Detalles de viaje:</h1>
-    <h4>{{ $trip->title }}</h4>
-    <h4>Fecha: {{ $trip->date->format('d M, Y') }}</h4>
-    <h4>Iniciando en: {{ $trip->address }}</h4>
-    <h4>
+    <h2>Detalles de viaje:</h2>
+    <h4 style="margin: 0">{{ $trip->title }}</h4>
+    <h4 style="margin: 0">Fecha: {{ $trip->date->format('d M, Y') }}</h4>
+    <h4 style="margin: 0">Iniciando en: {{ $trip->address }}</h4>
+    <h4 style="margin: 0">
         ID de viaje: 
         <span style="color: red">{{ $trip->trip_id }}</span>
     </h4>
 
-    <h1>Pasajeros:</h1>
-    <table cellpadding="5" cellspacing="0" border="1">
+    <h2>Pasajeros:</h2>
+    <table cellpadding="2" cellspacing="0">
         <thead>
             <tr>
                 <th>Nombre:</th>
@@ -40,13 +40,13 @@
         </tbody>
     </table>
 
-    <h1>Conductor:</h1>
-    <table cellpadding="5" cellspacing="0" border="1">
+    <h2>Conductor:</h2>
+    <table cellpadding="2" cellspacing="0">
         <tbody>
             <tr>
                 <th width="25%">Fotografía:</th>
                 <td>
-                    <img src="{{ $trip->driver->driver->avatar_url }}" style="height: 90px; width: auto;" alt="">
+                    <img src="{{ $trip->driver->driver->avatar_url }}" style="height: 70px; width: auto;" alt="">
                 </td>
             </tr>
             <tr>
@@ -64,13 +64,13 @@
         </tbody>
     </table>
 
-    <h1>Vehículo:</h1>
-    <table cellpadding="5" cellspacing="0" border="1">
+    <h2>Vehículo:</h2>
+    <table cellpadding="2" cellspacing="0">
         <tbody>
             <tr>
                 <th width="25%">Fotografía:</th>
                 <td>
-                    <img src="{{ $trip->driver->vehicle->picture_url_public_path }}" style="height: 100px; width: auto;" alt="">
+                    <img src="{{ $trip->driver->vehicle->picture_url_public_path }}" style="height: 70px; width: auto;" alt="">
                 </td>
             </tr>
             <tr>
