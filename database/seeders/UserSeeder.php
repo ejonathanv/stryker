@@ -15,27 +15,10 @@ class UserSeeder extends Seeder
     public function run()
     {
         User::factory()->create([
-            'first_name' => 'Jonathan',
-            'last_name' => 'Velazquez',
+            'first_name' => 'Admin',
+            'last_name' => 'Admin',
             'email' => 'admin@admin.com',
-            'role' => 'admin',
-            'password' => \Hash::make('admin357')
-        ]);
-
-        User::factory()->create([
-            'first_name' => 'Agente',
-            'last_name' => 'Uno',
-            'email' => 'stryker@proteusconsulting.com',
-            'role' => 'admin',
-            'password' => \Hash::make('Stryk3r@357')
-        ]);
-
-        User::factory()->create([
-            'first_name' => 'Agente',
-            'last_name' => 'Dos',
-            'email' => 'vabaroa@proteusconsulting.com',
-            'role' => 'admin',
-            'password' => \Hash::make('Stryk3r@357')
+            'role' => 'admin'
         ]);
     }
 }
