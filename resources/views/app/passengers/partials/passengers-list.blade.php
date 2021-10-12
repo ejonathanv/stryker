@@ -27,7 +27,7 @@
                     <td>{{ $passenger->full_name }}</td>
                     <td>{{ $passenger->email }}</td>
                     <td>{{ $passenger->phone }}</td>
-                    <td>{{ $passenger->company->name }}</td>
+                    <td>{{ optional($passenger->company)->name }}</td>
                     <td>
                         <a href="{{ route('passengers.show', $passenger) }}">
                             Detalles
