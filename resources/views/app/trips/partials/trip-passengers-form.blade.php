@@ -14,7 +14,10 @@
                          <option disabled selected value="">--Elige una opción--</option>
                          @foreach($passengers as $passenger)
                              <option value="{{ $passenger->id }}">
-                                 {{ $passenger->full_name }} - {{ $passenger->company->name }}
+                                 {{ $passenger->full_name }} 
+                                 @if($passenger->company)
+                                    - {{ $passenger->company->name }}
+                                 @endif
                              </option>
                          @endforeach
                      </select>
