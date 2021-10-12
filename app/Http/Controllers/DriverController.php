@@ -9,7 +9,7 @@ use Illuminate\Validation\Rule;
 class DriverController extends Controller
 {
     public function index(){
-        $drivers = Driver::orderBy('first_name')->paginate(10);
+        $drivers = Driver::paginate(10);
         return view('app.drivers.index', compact('drivers'));
     }
     public function create(){

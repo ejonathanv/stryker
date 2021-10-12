@@ -18,7 +18,24 @@ class UserSeeder extends Seeder
             'first_name' => 'Jonathan',
             'last_name' => 'Velazquez',
             'email' => 'admin@admin.com',
-            'role' => 'admin'
+            'role' => 'admin',
+            'password' => \Hash::make('admin357')
+        ]);
+
+        User::factory()->create([
+            'first_name' => 'Agente',
+            'last_name' => 'Uno',
+            'email' => 'stryker@proteusconsulting.com',
+            'role' => 'admin',
+            'password' => \Hash::make('Stryk3r@357')
+        ]);
+
+        User::factory()->create([
+            'first_name' => 'Agente',
+            'last_name' => 'Dos',
+            'email' => 'vabaroa@proteusconsulting.com',
+            'role' => 'admin',
+            'password' => \Hash::make('Stryk3r@357')
         ]);
     }
 }

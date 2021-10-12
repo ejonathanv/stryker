@@ -18,10 +18,10 @@ class CreateTripDriversTable extends Migration
             $table->integer('trip_id');
             $table->integer('driver_id');
             $table->integer('vehicle_id');
-            $table->string('from');
-            $table->timestamp('from_time');
-            $table->string('to');
-            $table->timestamp('to_time');
+            $table->string('from')->nullable();
+            $table->timestamp('from_time')->nullable();
+            $table->string('to')->nullable();
+            $table->timestamp('to_time')->nullable();
             $table->timestamps();
         });
     }
