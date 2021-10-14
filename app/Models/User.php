@@ -48,5 +48,20 @@ class User extends Authenticatable
     public function driver(){
         return $this->hasOne(Driver::class);
     }
+    public function getRoleNameAttribute(){
+        switch ($this->role) {
+            case 'admin':
+                return 'Administrador';
+                break;
+
+            case 'user':
+                return 'Conductor';
+                break;
+            
+            case 'passenger':
+                return 'Pasajero';
+                break;
+        }
+    }
 
 }
