@@ -92,7 +92,7 @@
                                         : '' }}
                                 @endif
                                 value="user">
-                                Usuario
+                                Conductor
                             </option>
                             <option
                                 @if($user)
