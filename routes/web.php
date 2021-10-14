@@ -1,17 +1,24 @@
 <?php
 
 use App\Http\Controllers\AppController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DriverController;
 use App\Http\Controllers\GroupController;
 use App\Http\Controllers\PassengerController;
 use App\Http\Controllers\TripController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\VehicleController;
 use Illuminate\Support\Facades\Route;
 
 Route::redirect('/', 'login');
 Route::redirect('register', 'login');
 Route::group(['prefix' => 'dashboard', 'middleware' => 'auth'], function(){
-    Route::redirect('/', '/dashboard/trips')->name('dashboard');
+
+    // Dashboard
+
+    Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+    Route::get('admin', [DashboardController::class, 'admin'])->name('admin-dashboard');
+    Route::get('driver', [DashboardController::class, 'driver'])->name('driver-dashboard');
 
     // Viajes
     Route::resource('/trips', TripController::class);
@@ -32,6 +39,9 @@ Route::group(['prefix' => 'dashboard', 'middleware' => 'auth'], function(){
 
     // Vehiculos
     Route::resource('/vehicles', VehicleController::class);
+
+    // Usuarios
+    Route::resource('/users', UserController::class);
 
 });
 require __DIR__.'/auth.php';

@@ -57,6 +57,15 @@
               <li><a href="{{ route('vehicles.index') }}">Lista de vehículos</a></li>
             </ul>
           </li>
+          <li class="dropdown">
+            <a class="nav-link menu-title" href="javascript:void(0)">
+              <i data-feather="users"></i><span>Usuarios</span>
+            </a>
+            <ul class="nav-submenu menu-content">
+              <li><a href="{{ route('users.create') }}">Nuevo</a></li>
+              <li><a href="{{ route('users.index') }}">Lista de usuarios</a></li>
+            </ul>
+          </li>
         </ul>
       </div>
       <div class="right-arrow" id="right-arrow"><i data-feather="arrow-right"></i></div>
