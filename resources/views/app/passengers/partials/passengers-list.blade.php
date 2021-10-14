@@ -12,7 +12,6 @@
         <table class="table">
             <thead>
                 <tr>
-                    <th scope="col">#</th>
                     <th scope="col">Nombre</th>
                     <th scope="col">Correo electrónico</th>
                     <th scope="col">Teléfono</th>
@@ -23,7 +22,6 @@
             <tbody>
                 @foreach($passengers as $passenger)
                 <tr>
-                    <th scope="row">{{ $passenger->id }}</th>
                     <td>{{ $passenger->full_name }}</td>
                     <td>{{ $passenger->email }}</td>
                     <td>{{ $passenger->phone }}</td>

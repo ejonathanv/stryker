@@ -29,6 +29,7 @@ class TripController extends Controller
         $trip->title = $request->title;
         $trip->address = $request->address;
         $trip->date = Carbon::parse($request->date);
+        $trip->status = $request->status;
         $trip->save();
 
         return redirect()->route('trips.show', $trip)->with('message', "Se ha creado un nuevo viaje.");
@@ -40,7 +41,7 @@ class TripController extends Controller
             'group' => 'sometimes|nullable|exists:groups,id',
             'address' => 'required|string',
             'date' => 'required|date',
-            'status' => 'required|in:1,2,3,4' 
+            'status' => 'required|in:1,2,3' 
         ];
     }
 
@@ -75,6 +76,7 @@ class TripController extends Controller
         $trip->title = $request->title;
         $trip->address = $request->address;
         $trip->date = Carbon::parse($request->date);
+        $trip->status = $request->status;
         $trip->save();
 
         return redirect()->back()->with('message', "La información ha sido actualizada");

@@ -69,8 +69,7 @@
                             id="passengerEmail" 
                             type="email"
                             name="email"
-                            value="{{ $passenger ? $passenger->email : old('email') }}"
-                            required>
+                            value="{{ $passenger ? $passenger->email : old('email') }}">
 
                         @error('email')
                             <small class="form-text text-danger">{{ $message }}</small>

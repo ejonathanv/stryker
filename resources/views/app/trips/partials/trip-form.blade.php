@@ -111,14 +111,6 @@
                                         ? 'selected'
                                         : ''
                                     : '' }}>
-                                Borrador
-                            </option>
-                            <option value="4"
-                                {{ $trip 
-                                    ? $trip->status == 4 
-                                        ? 'selected'
-                                        : ''
-                                    : '' }}>
                                 Cancelado
                             </option>
                         </select>

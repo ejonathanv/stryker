@@ -17,6 +17,7 @@
                     <th scope="col">Título</th>
                     <th scope="col">Conductor</th>
                     <th scope="col">Pasajeros</th>
+                    <th scope="col">Estatus</th>
                     <th></th>
                 </tr>
             </thead>
@@ -39,6 +40,7 @@
                         @endif
                     </td>
                     <td>({{ count($trip->passengers) }}) Pasajeros</td>
+                    <td>{{ $trip->estatus }}</td>
                     <td>
                         <a href="{{ route('trips.show', $trip) }}">
                             Detalles

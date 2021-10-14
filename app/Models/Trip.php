@@ -32,5 +32,23 @@ class Trip extends Model
             ? $this->driver->driver->full_name
             : 'Sin conductor asignado';
     }
+    public function getEstatusAttribute(){
+
+        $status = $this->status;
+        switch ($status) {
+            case 1:
+                return 'Activo';
+                break;
+
+            case 2:
+                return 'Inactivo';
+                break;
+
+            case 3:
+                return 'Cancelado';
+                break;
+        }
+
+    }
 
 }
