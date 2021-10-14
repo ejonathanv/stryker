@@ -9,10 +9,34 @@ use PDF;
 use Illuminate\Http\Request;
 class TripController extends Controller
 {
+
+    public function __construct(){
+
+        $this->middleware('role:admin')
+            ->only(['create', 'store', 'update']);
+
+    }
+
     public function index(){
-        $trips = Trip::orderBy('date', 'desc')->paginate(10); 
+        $user = auth()->user();
+        $trips = $this->getTripsByUserRole($user);
         return view('app.trips.index', compact('trips'));
     }
+
+    public function getTripsByUserRole($user){
+        $trips = null;
+        if($user->role == 'admin'){
+            $trips = Trip::orderBy('date', 'desc')->paginate(10); 
+        }elseif($user->role == 'user'){
+            $driver = $user->driver;
+            $tripsIds = $driver->trips->pluck('trip_id');
+            $trips = Trip::whereIn('id', $tripsIds)
+                ->orderBy('date', 'desc')
+                ->paginate(10);
+        }
+        return $trips;
+    }
+
     public function create(){
         return view('app.trips.create');
     }

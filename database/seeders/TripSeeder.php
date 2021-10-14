@@ -24,7 +24,7 @@ class TripSeeder extends Seeder
             ]);
 
 
-            TripDriver::factory()->count(3)->create([
+            TripDriver::factory()->create([
                 'trip_id' => $trip->id
             ]);
 

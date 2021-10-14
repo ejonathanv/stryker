@@ -2,8 +2,8 @@
 <x-app-sidebar />
 <div class="page-body">
   <div class="container-fluid">
-    <div class="page-header d-flex align-items-center">
-      <h3>{{ $pageTitle }}</h3>
+    <div class="page-header d-block d-sm-flex align-items-center">
+      <h3 class="mb-3 mb-sm-0">{{ $pageTitle }}</h3>
       <div class="ms-auto">
         {{ $helperLinks }}
       </div>

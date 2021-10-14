@@ -25,5 +25,15 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Paginator::useBootstrap();
+
+        \Blade::if('role', function (...$roles) {
+            $user = auth()->user();
+
+            foreach($roles as $role){
+                if($user->role == $role){
+                    return true;
+                }
+            }
+        });
     }
 }

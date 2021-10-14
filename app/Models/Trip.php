@@ -20,7 +20,7 @@ class Trip extends Model
     }
 
     public function drivers(){
-        return $this->hasMany(TripDriver::class);
+        return $this->hasMany(TripDriver::class, 'trip_id', 'id');
     }
 
     public function getDriverAttribute(){

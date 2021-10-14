@@ -10,7 +10,7 @@
                 @method('PUT')
             @endif
             <div class="row mb-3">
-                <div class="col-12 col-sm-6">
+                <div class="col-12 col-sm-6 mb-3 mb-sm-0">
                     <div class="mb-0">
                         <label class="col-form-label pt-0" for="tripTitle">*Título</label>
                         <input class="form-control" 
@@ -52,7 +52,7 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-12 col-sm-6">
+                <div class="col-12 col-sm-6 mb-3 mb-sm-0">
                     <div class="mb-0">
                         <label class="col-form-label pt-0" for="tripAddress">*Dirección:</label>
                         <input class="form-control" 
@@ -66,7 +66,7 @@
                         @enderror
                     </div>
                 </div>
-                <div class="col-12 col-sm-3">
+                <div class="col-12 col-sm-3 mb-3 mb-sm-0">
                     <div class="mb-0">
                         <label class="col-form-label pt-0" for="tripDate">*Fecha:</label>
                         <input class="form-control" 

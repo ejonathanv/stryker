@@ -16,12 +16,16 @@ class RoleMiddleware
      */
     public function handle(Request $request, Closure $next, ...$roles)
     {
+        
         $user = auth()->user();
 
-        $role = $user->role;
+        foreach($roles as $role){
+            if($user->role == $role){
+                return $next($request);
+            }
+        }
 
-        dd($roles);
+        return redirect()->back()->with('message', 'Acceso denegado.');
 
-        return $next($request);
     }
 }

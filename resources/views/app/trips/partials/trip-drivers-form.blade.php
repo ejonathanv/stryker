@@ -7,9 +7,11 @@
     @if($trip->driver)
         <div class="card-body border-top border-bottom mt-4">
             <div class="row">
-                <div class="col-12 col-sm-6">
+                <div class="col-12 col-sm-6 mb-3 mb-sm-0">
                     <div class="d-flex align-items-center">
-                        <div class="avatarThumb" style="background-image: url('{{ asset($trip->driver->driver->avatar_url) }}')"></div>
+                        <div>
+                            <div class="avatarThumb" style="background-image: url('{{ asset($trip->driver->driver->avatar_url) }}')"></div>
+                        </div>
                         <div class="ms-3">
                             <small class="d-block mb-2 font-weight-bold">Conductor asignado:</small>
                             <h6 class="text-success">{{ $trip->driver->driver->full_name }}</h6>
@@ -20,7 +22,9 @@
 
                 <div class="col-12 col-sm-6">
                     <div class="d-flex align-items-center">
-                        <div class="avatarThumb" style="background-image: url('{{ asset($trip->driver->vehicle->picture_url) }}')"></div>
+                        <div>
+                            <div class="avatarThumb" style="background-image: url('{{ asset($trip->driver->vehicle->picture_url) }}')"></div>
+                        </div>
                         <div class="ms-3">
                             <small class="d-block mb-2 font-weight-bold">Vehículo:</small>
                             <h6 class="text-success">{{ $trip->driver->vehicle->short_name }}</h6>
@@ -35,7 +39,7 @@
         <form class="theme-form" action="{{ route('set-trip-driver', $trip) }}" id="tripDriversForm" method="post">
             @csrf
             <div class="row mb-3">
-                <div class="col-12 col-sm-6">
+                <div class="col-12 col-sm-6 mb-3 mb-sm-0">
                     <div class="mb-0">
                         <label class="col-form-label pt-0" for="selectDriver">*Conductor:</label>
                         <select class="form-select" id="selectDriver" name="driver" required>
@@ -78,7 +82,7 @@
             </div>
 
             <div class="row mb-3">
-                <div class="col-12 col-sm-6">
+                <div class="col-12 col-sm-6 mb-3 mb-sm-0">
                     <div class="mb-0">
                         <label class="col-form-label pt-0" for="tripFrom">*Ubicación de inicio de viaje:</label>
                         <input class="form-control" 
@@ -109,7 +113,7 @@
             </div>
 
             <div class="row">
-                <div class="col-12 col-sm-6">
+                <div class="col-12 col-sm-6 mb-3 mb-sm-0">
                     <div class="mb-0">
                         <label class="col-form-label pt-0" for="tripTo">*Ubicación de finalización de viaje:</label>
                         <input class="form-control" 
